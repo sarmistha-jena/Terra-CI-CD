@@ -1,7 +1,6 @@
 module "vpc" {
   source = "./modules/vpc"
   vpc_cidr = module.vpc.vpc_cidr
-  vpc_id = module.vpc.vpc_id
   build_name = var.build_name
 }
 
