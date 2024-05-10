@@ -1,6 +1,5 @@
 module "vpc" {
   source = "./modules/vpc"
-  vpc_cidr = module.vpc.vpc_cidr
   build_name = var.build_name
 }
 
