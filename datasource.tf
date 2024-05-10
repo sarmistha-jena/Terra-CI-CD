@@ -3,7 +3,7 @@ data "aws_availability_zones" "azs" {
 }
 
 data "aws_subnets" "filtered_public" {
-  for_each = toset(data.aws_availability_zones.azs.id)
+  for_each = toset(data.aws_availability_zones.azs.zone_ids)
 
   filter {
     name   = "tag-key"
