@@ -21,7 +21,7 @@ module "private_subnet" {
   subnet_cidr = "12.0.32.0/20"
   build_name = var.build_name
   subnetname = "private"
-  map_public_ip_on_launch = false
   count = length(data.aws_availability_zones.azs.names)
   subnet_az = data.aws_availability_zones.azs.names[count.index]
+  map_public_ip = false
 }

@@ -5,3 +5,7 @@ variable "build_name" {}
 variable "subnetname" {
   default = "public"
 }
+variable "map_public_ip" {
+  type = bool
+  default = true
+}
