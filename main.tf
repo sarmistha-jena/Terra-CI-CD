@@ -33,7 +33,7 @@ module "security_group_8080" {
   fromport   = 8080
   toport     = 8080
   vpcid      = module.vpc.vpc_id
-  protocol   = tcp
+  protocol   = "tcp"
 }
 
 module "server1" {
