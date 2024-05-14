@@ -36,6 +36,20 @@ module "security_group_8080" {
   protocol   = "tcp"
 }
 
+module "igw" {
+  source = "./modules/internetgateway"
+  vpcid = module.vpc.vpc_id
+  build_name = var.build_name
+}
+
+module "route_table" {
+  source = "./modules/routetable"
+  build_name = var.build_name
+  igwId = module.igw.igwId
+  pubEc2NetworkInterfaceId = module.server1.pubEc2NetworkInterfaceId
+  vpcid = module.vpc.vpc_id
+}
+
 module "server1" {
   source     = "./modules/ec2"
   ami        = data.aws_ami.linux.id
