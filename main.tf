@@ -29,7 +29,7 @@ module "private_subnet" {
 module "security_group_8080" {
   source     = "./modules/securitygroup"
   build_name = var.build_name
-  cidrblock  = 0.0.0.0/0
+  cidrblock  = "0.0.0.0/0"
   fromport   = 8080
   toport     = 8080
   vpcid      = module.vpc.vpc_id
