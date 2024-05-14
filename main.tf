@@ -42,4 +42,5 @@ module "server1" {
   build_name = var.build_name
   sg         = module.security_group_8080.secgrp_id
   subnet     = module.public_subnet.subnetid
+  ip_association = true
 }
