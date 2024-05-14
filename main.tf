@@ -50,6 +50,16 @@ module "route_table" {
   vpcid = module.vpc.vpc_id
 }
 
+resource "aws_route_table_association" "pub-sub-rt" {
+  subnet_id      = module.public_subnet.subnetid
+  route_table_id = module.route_table.rt_public_id
+}
+
+resource "aws_route_table_association" "pri-sub-rt" {
+  subnet_id      = module.private_subnet.subnetid
+  route_table_id = module.route_table.rt_private_id
+}
+
 module "server1" {
   source     = "./modules/ec2"
   ami        = data.aws_ami.linux.id
