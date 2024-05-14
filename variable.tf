@@ -1,4 +1,4 @@
 variable "build_name" {
-  type = string
+  type    = string
   default = "CI-CD practice"
 }

@@ -6,6 +6,6 @@ variable "subnetname" {
   default = "public"
 }
 variable "map_public_ip" {
-  type = bool
+  type    = bool
   default = true
 }
