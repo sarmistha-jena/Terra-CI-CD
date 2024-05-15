@@ -74,6 +74,7 @@ module "nacl-pub" {
   vpcid = module.vpc.vpc_id
   build_name = var.build_name
   subnetid = module.public_subnet.subnetid
+  subnetcidr = module.public_subnet.subnetcidr
 }
 
 resource "aws_network_acl_association" "nacl-pub-sub" {
