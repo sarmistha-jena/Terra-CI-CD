@@ -68,3 +68,15 @@ module "server1" {
   subnet     = module.public_subnet.subnetid
   ip_association = true
 }
+
+module "nacl-pub" {
+  source = "./modules/nacl"
+  vpcid = module.vpc.vpc_id
+  build_name = var.build_name
+  subnetid = module.public_subnet.subnetid
+}
+
+resource "aws_network_acl_association" "nacl-pub-sub" {
+  network_acl_id = module.nacl-pub.naclid
+  subnet_id      = module.public_subnet.subnetid
+}
