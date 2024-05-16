@@ -37,17 +37,17 @@ module "security_group_8080" {
 }
 
 module "igw" {
-  source = "./modules/internetgateway"
-  vpcid = module.vpc.vpc_id
+  source     = "./modules/internetgateway"
+  vpcid      = module.vpc.vpc_id
   build_name = var.build_name
 }
 
 module "route_table" {
-  source = "./modules/routetable"
-  build_name = var.build_name
-  igwId = module.igw.igwId
+  source                   = "./modules/routetable"
+  build_name               = var.build_name
+  igwId                    = module.igw.igwId
   pubEc2NetworkInterfaceId = module.server1.pubEc2NetworkInterfaceId
-  vpcid = module.vpc.vpc_id
+  vpcid                    = module.vpc.vpc_id
 }
 
 resource "aws_route_table_association" "pub-sub-rt" {
@@ -61,13 +61,14 @@ resource "aws_route_table_association" "pri-sub-rt" {
 }
 
 module "server1" {
-  source     = "./modules/ec2"
-  ami        = data.aws_ami.linux.id
-  build_name = var.build_name
-  sg         = module.security_group_8080.secgrp_id
-  subnet     = module.public_subnet.subnetid
+  source         = "./modules/ec2"
+  ami            = data.aws_ami.linux.id
+  build_name     = var.build_name
+  sg             = module.security_group_8080.secgrp_id
+  subnet         = module.public_subnet.subnetid
   ip_association = true
 }
+/*
 
 module "nacl-pub" {
   source = "./modules/nacl"
@@ -80,4 +81,20 @@ module "nacl-pub" {
 resource "aws_network_acl_association" "nacl-pub-sub" {
   network_acl_id = module.nacl-pub.naclid
   subnet_id      = module.public_subnet.subnetid
+}*/
+module "elb" {
+  source      = "git@github.com:sarmistha-jena/TerraformProjects.git//Projects/Assignment_ELB/module/elbModule?ref=master"
+  sgElb       = module.security_group_8080.secgrp_id
+  elb_port    = var.elb_port
+  server_port = var.server_port
+  subnetId    = module.public_subnet.subnetid
+}
+
+module "asg" {
+  source      = "git@github.com:sarmistha-jena/TerraformProjects.git//Projects/Assignment_ELB/module/asgModule?ref=master"
+  elbName     = module.elb.elbName
+  server_port = var.server_port
+  sgServer    = module.security_group_8080.secgrp_id
+  subnetId    = module.public_subnet.subnetid
+  type        = var.type
 }
