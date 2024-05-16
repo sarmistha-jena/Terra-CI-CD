@@ -53,7 +53,7 @@ module "route_table" {
 }
 
 resource "aws_route_table_association" "pub-sub-rt" {
-  subnet_id      = module.public_subnet.subnetid
+  subnet_id      = module.public_subnet.subnetid[0]
   route_table_id = module.route_table.rt_public_id
 }
 
