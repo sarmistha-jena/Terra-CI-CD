@@ -58,7 +58,7 @@ resource "aws_route_table_association" "pub-sub-rt" {
 }
 
 resource "aws_route_table_association" "pri-sub-rt" {
-  subnet_id      = module.private_subnet.subnetid
+  subnet_id      = module.private_subnet.subnetid.id
   route_table_id = module.route_table.rt_private_id
 }
 
