@@ -83,7 +83,7 @@ resource "aws_network_acl_association" "nacl-pub-sub" {
   subnet_id      = module.public_subnet.subnetid
 }*/
 module "elb" {
-  source      = "git@github.com:sarmistha-jena/TerraformProjects.git//Projects/Assignment_ELB/module/elbModule?ref=master"
+  source      = "github.com:sarmistha-jena/TerraformProjects.git//Projects/Assignment_ELB/module/elbModule?ref=master"
   sgElb       = module.security_group_8080.secgrp_id
   elb_port    = var.elb_port
   server_port = var.server_port
@@ -91,7 +91,7 @@ module "elb" {
 }
 
 module "asg" {
-  source      = "git@github.com:sarmistha-jena/TerraformProjects.git//Projects/Assignment_ELB/module/asgModule?ref=master"
+  source      = "github.com:sarmistha-jena/TerraformProjects.git//Projects/Assignment_ELB/module/asgModule?ref=master"
   elbName     = module.elb.elbName
   server_port = var.server_port
   sgServer    = module.security_group_8080.secgrp_id
