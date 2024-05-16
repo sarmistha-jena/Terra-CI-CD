@@ -91,7 +91,7 @@ module "elb" {
 }
 
 module "asg" {
-  source      = "git::ssh://sarmistha-jena@github.com/sarmistha-jena/TerraformProjects.git//Projects/Assignment_ELB/module/asgModule"
+  source      = "git::https://github.com/sarmistha-jena/TerraformProjects.git//Projects/Assignment_ELB/module/asgModule"
   elbName     = module.elb.elbName
   server_port = var.server_port
   sgServer    = module.security_group_8080.secgrp_id
