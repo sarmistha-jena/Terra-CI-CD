@@ -12,7 +12,7 @@ variable "subnet" {
   default = ""
 }
 variable "instancetype" {
-  default = "t2.micro"
+  default = "t3.micro"
 }
 variable "keyname" {
   default = "linux-pract1"

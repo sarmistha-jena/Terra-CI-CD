@@ -9,5 +9,5 @@ variable "elb_port" {
   default = "80"
 }
 variable "type" {
-  default = "t2.micro"
+  default = "t3.micro"
 }
