@@ -53,7 +53,7 @@ module "route_table" {
 }
 
 resource "aws_route_table_association" "pub-sub-rt" {
-  subnet_id      = module.public_subnet.subnetid[0]
+  subnet_id      = module.public_subnet.subnetid[0].id
   route_table_id = module.route_table.rt_public_id
 }
 
@@ -67,7 +67,7 @@ module "server1" {
   ami            = data.aws_ami.linux.id
   build_name     = var.build_name
   sg             = module.security_group_8080.secgrp_id
-  subnet         = module.public_subnet.subnetid[1]
+  subnet         = module.public_subnet.subnetid[0].id
   ip_association = true
 }
 /*
