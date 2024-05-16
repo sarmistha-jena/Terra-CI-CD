@@ -12,7 +12,7 @@ module "public_subnet" {
   subnetname  = "public"
   #count = length(data.aws_availability_zones.azs.names)
   #subnet_az   = data.aws_availability_zones.azs.names[0]
-  list_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  list_subnet_cidrs = ["12.0.1.0/24", "12.0.2.0/24", "12.0.3.0/24"]
 }
 
 module "private_subnet" {
@@ -25,7 +25,7 @@ module "private_subnet" {
   #count = length(data.aws_availability_zones.azs.names)
   #subnet_az     = data.aws_availability_zones.azs.names[1]
   map_public_ip = false
-  list_subnet_cidrs = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
+  list_subnet_cidrs = ["12.0.4.0/24", "12.0.5.0/24", "12.0.6.0/24"]
 }
 
 module "security_group_8080" {
