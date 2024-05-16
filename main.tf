@@ -8,22 +8,24 @@ module "public_subnet" {
   #subnet_az = data.aws_availability_zones.azs.id[0]
   vpc_id      = module.vpc.vpc_id
   build_name  = var.build_name
-  subnet_cidr = "12.0.16.0/20"
+  #subnet_cidr = "12.0.16.0/20"
   subnetname  = "public"
   #count = length(data.aws_availability_zones.azs.names)
-  subnet_az   = data.aws_availability_zones.azs.names[0]
+  #subnet_az   = data.aws_availability_zones.azs.names[0]
+  list_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 }
 
 module "private_subnet" {
   source        = "./modules/subnet"
   #subnet_az = [for k, v in data.aws_subnets.filtered_public : v.ids[1]]
   vpc_id        = module.vpc.vpc_id
-  subnet_cidr   = "12.0.32.0/20"
+  #subnet_cidr   = "12.0.32.0/20"
   build_name    = var.build_name
   subnetname    = "private"
   #count = length(data.aws_availability_zones.azs.names)
-  subnet_az     = data.aws_availability_zones.azs.names[1]
+  #subnet_az     = data.aws_availability_zones.azs.names[1]
   map_public_ip = false
+  list_subnet_cidrs = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
 }
 
 module "security_group_8080" {
@@ -65,7 +67,7 @@ module "server1" {
   ami            = data.aws_ami.linux.id
   build_name     = var.build_name
   sg             = module.security_group_8080.secgrp_id
-  subnet         = module.public_subnet.subnetid
+  subnet         = module.public_subnet.subnetid[1]
   ip_association = true
 }
 /*
